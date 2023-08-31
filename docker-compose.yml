@@ -1,0 +1,17 @@
+# Does not work yet.
+version: 3
+services:
+  trinity:
+    Dockerfile: Dockerfile
+  head:
+    image: trinity
+    ports:
+      - "7001:7001"
+  node1:
+    image: trinity
+    ports:
+      - "7002:7002"
+  node2:
+    image: trinity
+    ports:
+      - "7003:7003"

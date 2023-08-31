@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Trinity ConfigVersion="2.0">
+    <section name="Application">
+        <entry name="CurrentRunningMode">Distributed</entry>
+    </section>
+
+    <Cluster RunningMode="Server">
+        <Server Endpoint="127.0.0.1:7000" />
+        <Server Endpoint="127.0.0.1:7001" />
+        <Server Endpoint="127.0.0.1:7002" />
+    </Cluster>
+</Trinity>
