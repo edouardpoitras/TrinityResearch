@@ -1,17 +1,25 @@
-# Does not work yet.
-version: 3
+version: '3.9'
 services:
-  trinity:
-    Dockerfile: Dockerfile
-  head:
-    image: trinity
-    ports:
-      - "7001:7001"
   node1:
-    image: trinity
+    build: &build-definition
+      context: .
+      dockerfile: Dockerfile
+    image: trinity1
+    container_name: node1
     ports:
-      - "7002:7002"
+      - "7000:7000"
+    command: dotnet run --no-build --project DistributedHashtable -- -s DistributedHashtable/trinity1.compose.xml
   node2:
-    image: trinity
+    build: *build-definition
+    image: trinity2
+    container_name: node2
     ports:
-      - "7003:7003"
+      - "7001:7000"
+    command: dotnet run --no-build --project DistributedHashtable -- -s DistributedHashtable/trinity2.compose.xml
+  node3:
+    build: *build-definition
+    image: trinity3
+    container_name: node3
+    ports:
+      - "7002:7000"
+    command: dotnet run --no-build --project DistributedHashtable -- -s DistributedHashtable/trinity3.compose.xml
