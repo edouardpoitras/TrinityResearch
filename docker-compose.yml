@@ -1,25 +1,27 @@
 version: '3.9'
 services:
-  node1:
+  head:
     build: &build-definition
       context: .
       dockerfile: Dockerfile
-    image: trinity1
-    container_name: node1
+    image: trinity
+    container_name: head
     ports:
       - "7000:7000"
-    command: dotnet run --no-build --project DistributedHashtable -- -s DistributedHashtable/trinity1.compose.xml
+    command: dotnet run --no-build --project DistributedHashtable/DHT.GE.Server -- head:7000,node1:7001,node2:7002
+    depends_on:
+      # Need to run node2 and node2 before starting the head cluster node.
+      - node1
+      - node2
+  node1:
+    image: trinity
+    container_name: node1
+    ports:
+      - "7001:7001"
+    command: dotnet run --no-build --project DistributedHashtable/DHT.GE.Server -- node1:7001
   node2:
-    build: *build-definition
-    image: trinity2
+    image: trinity
     container_name: node2
     ports:
-      - "7001:7000"
-    command: dotnet run --no-build --project DistributedHashtable -- -s DistributedHashtable/trinity2.compose.xml
-  node3:
-    build: *build-definition
-    image: trinity3
-    container_name: node3
-    ports:
-      - "7002:7000"
-    command: dotnet run --no-build --project DistributedHashtable -- -s DistributedHashtable/trinity3.compose.xml
+      - "7002:7002"
+    command: dotnet run --no-build --project DistributedHashtable/DHT.GE.Server -- node2:7002

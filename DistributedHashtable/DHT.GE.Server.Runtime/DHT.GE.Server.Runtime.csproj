@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="TSL.Protocol.Schema\DHT-Protocol.tsl" />
+    <None Remove="TSL.Schema\DHT.tsl" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="GraphEngine.Core" Version="3.*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TslCodegen Include="TSL.Protocol.Schema\DHT-Protocol.tsl" />
+    <TslCodegen Include="TSL.Schema\DHT.tsl" />
+  </ItemGroup>
+
+</Project>

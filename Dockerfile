@@ -10,4 +10,5 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 RUN git clone https://github.com/microsoft/GraphEngine.git
 RUN bash GraphEngine/tools/build.sh
-RUN dotnet build DistributedHashtable
+RUN dotnet build DistributedHashtable/DHT.GE.Client
+RUN dotnet build DistributedHashtable/DHT.GE.Server
